@@ -36,7 +36,6 @@ services:
       CACHE_STORE: file
       QUEUE_CONNECTION: sync
       SCOUT_DRIVER: database
-      BROADCAST_CONNECTION: log
     volumes:
       - bagisto-storage-local:/var/www/html/storage
     depends_on:

@@ -11,11 +11,11 @@ return [
     | framework when an event needs to be broadcast. You may set this to
     | any of the connections defined in the "connections" array below.
     |
-    | Supported: "redis", "log", "null"
+    | Supported: "redis", "log", "null" — default is null (no realtime broadcasting).
     |
     */
 
-    'default' => env('BROADCAST_CONNECTION', env('BROADCAST_DRIVER', 'log')),
+    'default' => env('BROADCAST_CONNECTION', env('BROADCAST_DRIVER', 'null')),
 
     /*
     |--------------------------------------------------------------------------
