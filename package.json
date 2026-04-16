@@ -3,8 +3,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
-        "update-chat": "php artisan chat:update-hydrogen"
+        "build": "vite build"
     },
     "devDependencies": {
         "@playwright/test": "^1.58.1",

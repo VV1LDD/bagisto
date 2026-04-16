@@ -34,8 +34,6 @@ class CustomerDataGrid extends DataGrid
                 'customers.username as full_name', // Renamed for UI compatibility
                 'customers.credits_id as email',     // Renamed for UI compatibility
                 'customers.status',
-                'customers.is_call_enabled',
-                'customers.is_matrix_enabled',
                 'customer_groups.name as group',
                 // Real counters for traditional e-commerce metrics
                 DB::raw('(SELECT COUNT(*) FROM orders WHERE orders.customer_id = customers.id) as order_count'),
@@ -104,22 +102,6 @@ class CustomerDataGrid extends DataGrid
                 ['label' => 'Активен', 'value' => 1],
                 ['label' => 'Неактивен', 'value' => 0],
             ],
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'is_call_enabled',
-            'label'      => 'Звонки',
-            'type'       => 'boolean',
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'is_matrix_enabled',
-            'label'      => 'Матрикс',
-            'type'       => 'boolean',
-            'filterable' => true,
             'sortable'   => true,
         ]);
 

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\API\AddressController;
-use Webkul\Shop\Http\Controllers\API\CallController;
 use Webkul\Shop\Http\Controllers\API\CartController;
 use Webkul\Shop\Http\Controllers\API\CategoryController;
 use Webkul\Shop\Http\Controllers\API\CompareController;
@@ -13,8 +12,6 @@ use Webkul\Shop\Http\Controllers\API\OrganizationController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
-use Webkul\Shop\Http\Controllers\API\MessengerController;
-
 Route::group(['prefix' => 'api'], function () {
     Route::controller(CoreController::class)->prefix('core')->group(function () {
         Route::get('countries', 'getCountries')->name('shop.api.core.countries');
@@ -136,6 +133,5 @@ Route::group(['prefix' => 'api'], function () {
             Route::delete('{id}', 'destroy')->name('shop.api.customers.account.wishlist.destroy');
         });
 
-        Route::get('messenger/credentials', [MessengerController::class, 'getCredentials']);
     });
 });

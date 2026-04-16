@@ -30,7 +30,6 @@ class CustomerServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \Webkul\Customer\Console\Commands\SyncCryptoBalances::class,
-                \Webkul\Customer\Console\Commands\UpdateHydrogenChat::class,
                 \Webkul\Customer\Console\Commands\MintWelcomeBonuses::class,
             ]);
 

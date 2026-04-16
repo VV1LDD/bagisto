@@ -230,7 +230,7 @@ class RegistrationController extends Controller
             'encrypted_mnemonic'    => Crypt::encryptString($recoveryKey),
             'public_key' => $publicKeyData['public_key'] ?? null,
             'public_key_hash' => $publicKeyData['public_key_hash'] ?? null,
-            'is_matrix_enabled'     => 1,
+            'is_matrix_enabled'     => 0,
             'api_token' => Str::random(80),
             'is_verified' => 1,
             'customer_group_id' => $this->customerGroupRepository->findOneWhere(['code' => $customerGroup])?->getKey(),

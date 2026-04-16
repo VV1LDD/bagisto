@@ -84,16 +84,6 @@ return [
         'api_key' => env('DADATA_API_KEY'),
     ],
 
-    'turn' => [
-        'url'      => env('TURN_URL', 'turn:turn.meanly.ru:3478'),
-        'username' => env('TURN_USERNAME', 'meanly'),
-        'password' => env('TURN_PASSWORD', 'meanly_secret'),
-    ],
-    'matrix' => [
-        'homeserver_url'             => env('MATRIX_SERVER_URL', 'https://matrix.meanly.ru'),
-        'homeserver_domain'          => env('MATRIX_HOMESERVER_DOMAIN', 'meanly.ru'),
-        'registration_shared_secret' => env('MATRIX_REGISTRATION_SHARED_SECRET'),
-    ],
     'telegram' => [
         'bot_token'    => env('TELEGRAM_BOT_TOKEN'),
         'bot_username' => env('TELEGRAM_BOT_USERNAME', 'meanly_bot'),

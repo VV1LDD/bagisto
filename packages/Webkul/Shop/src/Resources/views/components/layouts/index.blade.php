@@ -62,20 +62,6 @@
         />
 
         <script>
-            window.Laravel = {
-                reverbAppKey: '{{ config('broadcasting.connections.reverb.key') }}',
-                reverbHost: '{{ config('broadcasting.connections.reverb.frontend.host') && config('broadcasting.connections.reverb.frontend.host') !== '127.0.0.1' ? config('broadcasting.connections.reverb.frontend.host') : '' }}' || window.location.hostname,
-                reverbPort: '{{ config('broadcasting.connections.reverb.frontend.port') }}',
-                reverbScheme: '{{ config('broadcasting.connections.reverb.frontend.scheme') }}',
-                pusherAppKey: '{{ config('broadcasting.connections.pusher.key') }}',
-                pusherHost: '{{ config('broadcasting.connections.pusher.options.host') }}',
-                pusherPort: '{{ config('broadcasting.connections.pusher.options.port') }}',
-                pusherScheme: '{{ config('broadcasting.connections.pusher.options.scheme') }}',
-                pusherCluster: '{{ config('broadcasting.connections.pusher.options.cluster') }}',
-                turnUrl: '{{ config('services.turn.url') }}',
-                turnUsername: '{{ config('services.turn.username') }}',
-                turnPassword: '{{ config('services.turn.password') }}',
-            };
             window.meanlyComponents = [];
         </script>
 
@@ -541,9 +527,8 @@
             $chatwootToken = core()->getConfigData('general.content.chatwoot.website_token');
             $chatwootBaseUrl = core()->getConfigData('general.content.chatwoot.base_url') ?? 'https://support.wildcloud.ru';
 
-            // Unified visibility logic: hide on calls, registration, account, and auth-related pages
+            // Unified visibility logic: hide on registration, account, and auth-related pages
             $showChatwoot = $chatwootEnabled && $chatwootToken && ! (
-                request()->routeIs('shop.call.index') || 
                 request()->routeIs('shop.customer.account*') || 
                 request()->routeIs('shop.customers.account*') || 
                 request()->routeIs('shop.customer.session.index') ||
@@ -717,6 +702,5 @@
                 }
             });
         </script>
-        {{-- <v-messenger></v-messenger> --}}
     </body>
 </html>

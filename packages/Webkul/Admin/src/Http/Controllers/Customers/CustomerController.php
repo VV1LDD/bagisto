@@ -103,8 +103,6 @@ class CustomerController extends Controller
                         'is_investor',
                         'is_b2b_enabled',
                         'is_crypto_enabled',
-                        'is_call_enabled',
-                        'is_matrix_enabled',
                     ]));
 
         if (empty($data['phone'])) {
@@ -160,8 +158,6 @@ class CustomerController extends Controller
             'status',
             'is_suspended',
             'is_investor',
-            'is_call_enabled',
-            'is_matrix_enabled',
             'is_b2b_enabled',
             'is_crypto_enabled',
         ]);

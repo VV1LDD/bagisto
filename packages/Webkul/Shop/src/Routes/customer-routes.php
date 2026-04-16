@@ -383,22 +383,6 @@ Route::group([], function () {
                     Route::post('update-alias/{id}', 'updateAlias')->name('shop.customers.account.crypto.update_alias');
                     Route::delete('delete/{id}', 'destroy')->name('shop.customers.account.crypto.delete');
                 });
-                /**
-                 * Calls.
-                 */
-                Route::prefix('calls')->controller(\Webkul\Shop\Http\Controllers\Customer\Account\CallController::class)->group(function () {
-                    Route::get('', 'index')->name('shop.customers.account.calls.index');
-                    Route::post('signal', 'signal')->name('shop.customers.account.calls.signal');
-                });
-
-                /**
-                 * Matrix / Hydrogen Integration
-                 */
-                Route::controller(\Webkul\Shop\Http\Controllers\Customer\Account\MatrixController::class)->prefix('matrix')->group(function () {
-                    Route::get('', 'index')->name('shop.customers.account.matrix.index');
-                    Route::post('sync', 'sync')->name('shop.customers.account.matrix.sync');
-                });
-
             });
         });
     });

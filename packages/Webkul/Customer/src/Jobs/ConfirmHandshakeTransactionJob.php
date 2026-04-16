@@ -9,7 +9,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Webkul\Customer\Models\Handshake;
 use Webkul\Customer\Services\HotWalletService;
-use Webkul\Customer\Services\MatrixService;
 use Illuminate\Support\Facades\Log;
 
 class ConfirmHandshakeTransactionJob implements ShouldQueue
@@ -26,7 +25,7 @@ class ConfirmHandshakeTransactionJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(HotWalletService $hotWalletService, MatrixService $matrixService): void
+    public function handle(HotWalletService $hotWalletService): void
     {
         if (!$this->handshake->tx_hash) {
             Log::error("ConfirmHandshakeTransactionJob: Handshake #{$this->handshake->id} has no TX hash.");
@@ -49,9 +48,6 @@ class ConfirmHandshakeTransactionJob implements ShouldQueue
                 'tx_status' => 'confirmed',
             ]);
 
-            // Now that it's confirmed on-chain, create the Matrix room
-            $matrixService->createPeerRoom($this->handshake);
-            
         } else {
             Log::error("ConfirmHandshakeTransactionJob: Handshake #{$this->handshake->id} transaction failed.");
             

@@ -589,13 +589,4 @@ class Customer extends Authenticatable implements CustomerContract, HasPasskeys
         return "https://t.me/{$botUsername}?start={$this->telegram_token}";
     }
 
-    /**
-     * Get the Matrix user ID for the customer.
-     */
-    public function getMatrixIdAttribute(): string
-    {
-        $domain = config('services.matrix.homeserver_domain', 'meanly.ru');
-        
-        return "@{$this->credits_id}:{$domain}";
-    }
 }

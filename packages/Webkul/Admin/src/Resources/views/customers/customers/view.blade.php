@@ -215,20 +215,6 @@
                                         @{{ "@lang('admin::app.customers.customers.view.group')".replace(':group_code', customer.group?.name ?? 'N/A') }}
                                     </p>
 
-                                    <!-- Added P2P Call Status -->
-                                    <p class="text-gray-600 dark:text-gray-300">
-                                        📞 Звонки P2P: 
-                                        <span v-if="customer.is_call_enabled" class="label-active text-[11px]">Включены</span>
-                                        <span v-else class="label-canceled text-[11px]">Выключены</span>
-                                    </p>
-
-                                    <!-- Chat Matrix Status -->
-                                    <p class="text-gray-600 dark:text-gray-300">
-                                        💬 Чат Matrix: 
-                                        <span v-if="customer.is_matrix_enabled" class="label-active text-[11px]">Включен</span>
-                                        <span v-else class="label-canceled text-[11px]">Выключен</span>
-                                    </p>
-
                                     <!-- Added Crypto Balances Info -->
                                     <div class="mt-4 border-t dark:border-gray-800 pt-2">
                                         <p class="font-semibold text-gray-800 dark:text-white mb-2">Крипто Балансы</p>
