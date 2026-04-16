@@ -84,11 +84,6 @@ return [
         'api_key' => env('DADATA_API_KEY'),
     ],
 
-    'telegram' => [
-        'bot_token'    => env('TELEGRAM_BOT_TOKEN'),
-        'bot_username' => env('TELEGRAM_BOT_USERNAME', 'meanly_bot'),
-    ],
-
     'redeem' => [
         'url'   => env('REDEEM_API_URL'),
         'token' => env('REDEEM_API_TOKEN'),

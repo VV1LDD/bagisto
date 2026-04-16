@@ -48,17 +48,6 @@
 
         <!-- Right Navigation -->
         <div class="flex items-center gap-3">
-            @if(session()->get('logged_in_via_tma'))
-                <a href="{{ route('shop.customers.account.index') }}" 
-                   class="flex h-9 items-center gap-1.5 bg-[#D6FF00] px-3 text-[10px] font-black text-black border-2 border-zinc-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all uppercase tracking-tighter">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                    Меню
-                </a>
-            @endif
-
-
             @auth('customer')
                 <div class="flex flex-col items-end gap-1">
                     <div class="flex items-center gap-2">

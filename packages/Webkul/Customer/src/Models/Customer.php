@@ -124,8 +124,6 @@ class Customer extends Authenticatable implements CustomerContract, HasPasskeys
         'mnemonic_verified_at',
         'public_key',
         'public_key_hash',
-        'telegram_chat_id',
-        'telegram_token',
         'matrix_user_id',
         'matrix_access_token',
     ];
@@ -565,28 +563,6 @@ class Customer extends Authenticatable implements CustomerContract, HasPasskeys
     public static function getTotalSystemCredits(): float
     {
         return (float) static::sum('balance');
-    }
-
-    /**
-     * Generate a new telegram token for linking.
-     */
-    public function generateTelegramToken(): string
-    {
-        $token = \Illuminate\Support\Str::random(64);
-        
-        $this->update(['telegram_token' => $token]);
-
-        return $token;
-    }
-
-    /**
-     * Get the telegram link for deep linking.
-     */
-    public function getTelegramLinkAttribute(): string
-    {
-        $botUsername = config('services.telegram.bot_username', 'MeanlyBot');
-        
-        return "https://t.me/{$botUsername}?start={$this->telegram_token}";
     }
 
 }

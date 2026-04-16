@@ -89,11 +89,6 @@ Route::group([], function () {
     Route::post('passkeys/login', [PasskeyController::class, 'login'])->name('passkeys.login');
 
     /**
-     * Telegram Mini App routes.
-     */
-    Route::post('tma/login', [\Webkul\Shop\Http\Controllers\Customer\TmaController::class, 'login'])->name('shop.tma.login');
-
-    /**
      * Registration routes.
      */
     Route::controller(RegistrationController::class)->group(function () {
@@ -390,6 +385,4 @@ Route::group([], function () {
             });
         });
     });
-
-    Route::post('telegram/webhook', [\Webkul\Shop\Http\Controllers\Customer\TelegramBotController::class, 'webhook'])->name('shop.telegram.webhook');
 });

@@ -68,32 +68,6 @@
         @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
         <script src="https://unpkg.com/@simplewebauthn/browser/dist/bundle/index.umd.min.js" defer></script>
         <script src="https://unpkg.com/html5-qrcode" type="text/javascript" defer></script>
-        <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
-
-        <script>
-            /**
-             * Telegram Mini App (TMA) Detection & Environment Setup
-             */
-            (function() {
-                const tg = window.Telegram?.WebApp;
-                if (tg && tg.initData) {
-                    document.documentElement.classList.add('tma-mode');
-                    
-                    // Sync Telegram theme colors to CSS variables
-                    const theme = tg.themeParams;
-                    if (theme.bg_color) document.documentElement.style.setProperty('--tma-bg', theme.bg_color);
-                    if (theme.text_color) document.documentElement.style.setProperty('--tma-text', theme.text_color);
-                    if (theme.hint_color) document.documentElement.style.setProperty('--tma-hint', theme.hint_color);
-                    if (theme.link_color) document.documentElement.style.setProperty('--tma-link', theme.link_color);
-                    if (theme.button_color) document.documentElement.style.setProperty('--tma-button', theme.button_color);
-                    if (theme.button_text_color) document.documentElement.style.setProperty('--tma-button-text', theme.button_text_color);
-
-                    window.isTMA = true;
-                } else {
-                    window.isTMA = false;
-                }
-            })();
-        </script>
 
         <link
             rel="preconnect"
@@ -235,38 +209,6 @@
              * called in the last.
              */
             document.addEventListener("DOMContentLoaded", async function (event) {
-                // If in TMA and not logged in, trigger transparent login
-                if (window.isTMA && !document.querySelector('meta[name="customer-id"]')) {
-                    console.log('TMA: Initializing auto-login...');
-                    try {
-                        const tg = window.Telegram.WebApp;
-                        const response = await fetch('{{ route('shop.tma.login') }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                'Accept': 'application/json'
-                            },
-                            body: JSON.stringify({ initData: tg.initData })
-                        });
-
-                        if (response.ok) {
-                            const result = await response.json();
-                            if (result.success) {
-                                if (result.is_new_registration && result.redirect_url) {
-                                    window.location.href = result.redirect_url;
-                                } else {
-                                    // Reload to apply session and show authenticated state
-                                    window.location.reload();
-                                }
-                                return;
-                            }
-                        }
-                    } catch (e) {
-                        console.error('TMA Auto-login failed:', e);
-                    }
-                }
-
                 if (window.meanlyComponents) {
                     window.meanlyComponents.forEach(config => {
                         app.component(config.name, config.definition);
@@ -555,7 +497,7 @@
               })(document,"script");
             </script>
         @endif
-        <!-- QR Scanner Template (Telegram Style) -->
+        <!-- QR Scanner Template -->
         <script type="text/x-template" id="v-qr-scanner-template">
             <div v-if="isVisible" class="fixed inset-0 z-[10001] flex flex-col bg-black overflow-hidden animate-in fade-in duration-500" style="height: 100dvh;">
                 <!-- Immersive Header -->
