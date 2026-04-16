@@ -24,15 +24,19 @@
                 </div>
                 <div class="flex-1 min-w-0 pt-0.5">
                     <div class="flex flex-wrap items-center gap-2 mb-1">
-                        <span class="text-zinc-900 {{ $isOnboarding ? 'text-base' : 'text-lg' }} font-black uppercase tracking-tight">Фразы восстановления</span>
+                        <span class="text-zinc-900 {{ $isOnboarding ? 'text-base' : 'text-lg' }} font-black uppercase tracking-tight">Способ восстановления аккаунта</span>
                         @if ($pendingActivation)
-                            <span class="bg-amber-400 border-2 border-zinc-900 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest shadow-[2px_2px_0px_0px_rgba(24,24,27,1)]">активация nft 💎</span>
+                            <span class="bg-amber-400 border-2 border-zinc-900 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest shadow-[2px_2px_0px_0px_rgba(24,24,27,1)]">настройка</span>
                         @else
                             <span class="bg-[#FF4D6D] border-2 border-zinc-900 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white shadow-[2px_2px_0px_0px_rgba(24,24,27,1)]">критично</span>
                         @endif
                     </div>
                     <p class="{{ $isOnboarding ? 'text-[9px]' : 'text-[11px]' }} text-zinc-600 font-black uppercase tracking-wider leading-tight">
-                        {{ $pendingActivation ? 'Активируйте современный кошелек для NFT-подарков' : 'Единственный способ вернуть доступ к данным' }}
+                        @if ($pendingActivation)
+                            Сгенерируйте мнемонику из случайного числа слов — это основной способ восстановления доступа к аккаунту.
+                        @else
+                            Подтвердите мнемонику: без неё нельзя восстановить доступ к аккаунту при смене устройства или утере входа.
+                        @endif
                     </p>
                 </div>
                 <div class="pt-4 opacity-0 group-hover:opacity-100 transition-opacity">
