@@ -27,9 +27,6 @@ class CryptoController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        // Trigger on-demand deposit sync (rate-limited internally to 5 min per address)
-        $this->syncService->syncCustomerDeposits($customer);
-
         $addresses = $customer->crypto_addresses;
 
         return view('shop::customers.account.crypto.index', compact('addresses'));

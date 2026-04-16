@@ -174,18 +174,6 @@
                                     ::checked="customer.is_suspended" />
                             </x-admin::form.control-group>
 
-                            <!-- Investor Status -->
-                            <x-admin::form.control-group class="!mb-0">
-                                <x-admin::form.control-group.label>
-                                    💎 Инвестор
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control type="hidden" name="is_investor" value="0" />
-
-                                <x-admin::form.control-group.control type="switch" name="is_investor" :value="1"
-                                    label="Инвестор" ::checked="customer.is_investor" />
-                            </x-admin::form.control-group>
-
                             <!-- B2B possibilities Status -->
                             <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.label>

@@ -43,9 +43,6 @@
                             <span class="text-[14px] font-black text-zinc-900 uppercase tracking-tighter italic truncate">
                                 {{ data.user.name }}
                             </span>
-                            <span v-if="data.user.is_investor" class="bg-[#D6FF00] text-[9px] font-black text-zinc-900 px-2 py-0.5 border-2 border-zinc-900 shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] uppercase">
-                                Investor
-                            </span>
                         </div>
                         <p class="text-[10px] font-black text-zinc-400 uppercase tracking-widest mt-1">@{{ data.user.username }}</p>
                         
@@ -98,69 +95,13 @@
                 <transition name="fade" mode="out-in">
                     <div v-if="currentTab === 'dashboard'" class="space-y-12">
                         
-                        <!-- Investor Assets Grid (Only for investors) -->
-                        <div v-if="data.user.is_investor" class="space-y-6">
-                            <div class="flex items-center gap-4">
-                                <h3 class="text-[12px] font-black text-zinc-900 uppercase tracking-[0.2em] italic">Unified Assets Grid</h3>
-                                <div class="flex-1 h-[2px] bg-zinc-900"></div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div v-for="(config, id) in data.assets_config" :key="id"
-                                    class="bg-white border-4 border-zinc-900 p-5 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] group hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] transition-all">
-                                    <div class="flex justify-between items-start mb-4">
-                                        <div class="w-10 h-10 bg-zinc-900 border-2 border-zinc-900 flex items-center justify-center text-xl text-white shadow-[2px_2px_0px_0px_rgba(214,255,0,1)]">
-                                            {{ config.icon }}
-                                        </div>
-                                        <p class="text-[10px] font-black text-zinc-400 uppercase tracking-widest">{{ config.name }}</p>
-                                    </div>
-                                    <div class="space-y-0.5">
-                                        <p class="text-xl font-black text-zinc-900 tracking-tighter">{{ formatBalance(data.balances[id]) || '0.00' }}</p>
-                                        <p class="text-[9px] font-black text-zinc-300 uppercase tracking-widest">Available Balance</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Management Trigger (Investor Only) -->
-                            <div v-if="data.addresses && data.addresses.length > 0" class="space-y-6">
-                                <div v-for="address in data.addresses" :key="address.id"
-                                    class="bg-white border-4 border-zinc-900 flex shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] group overflow-hidden">
-                                    <div class="flex-1 flex gap-6 p-6 min-w-0 text-left items-center">
-                                        <div class="w-14 h-14 bg-zinc-900 border-3 border-zinc-900 flex items-center justify-center text-white text-2xl shadow-[3px_3px_0px_0px_rgba(214,255,0,1)]">
-                                            {{ data.assets_config[address.network]?.icon || '📦' }}
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <p class="text-[14px] font-black text-zinc-900 uppercase tracking-tighter italic truncate">
-                                                {{ address.alias || 'Primary Wallet' }}
-                                            </p>
-                                            <p class="text-[10px] font-black text-zinc-400 uppercase tracking-widest mt-1 truncate">{{ address.address }}</p>
-                                            <div class="mt-3 flex items-center justify-between">
-                                                <span class="text-lg font-black font-mono text-zinc-900">{{ formatBalance(address.balance) }}</span>
-                                                <button v-if="address.network.includes('arbitrum')"
-                                                    @click="openSendModal(address)"
-                                                    class="px-4 py-2 bg-[#D6FF00] border-3 border-zinc-900 text-zinc-900 text-[10px] font-black uppercase tracking-widest shadow-[3px_3px_0px_0px_rgba(24,24,27,1)] active:scale-95">
-                                                    Transfer
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="shrink-0 flex items-center px-4 border-l-4 border-zinc-900 bg-zinc-50 hover:bg-red-500 hover:text-white transition-colors cursor-pointer"
-                                         @click="deleteWallet(address)">
-                                        🗑️
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button @click="isAddWalletOpen = true"
-                                class="w-full bg-zinc-900 border-4 border-zinc-900 py-4 px-6 text-white text-[12px] font-black uppercase tracking-widest shadow-[6px_6px_0px_0px_rgba(214,255,0,1)] hover:bg-[#D6FF00] hover:text-zinc-900 transition-all active:scale-95">
-                                Connect New Wallet +
-                            </button>
-                        </div>
-
-                        <!-- Regular Dashboard Placeholder -->
-                        <div v-else class="text-center p-10 border-4 border-dashed border-zinc-200">
+                        <div class="text-center p-10 border-4 border-dashed border-zinc-200">
                              <div class="text-4xl mb-4">💎</div>
-                             <h3 class="text-[14px] font-black text-zinc-900 uppercase tracking-[0.2em]">Dashboard Active</h3>
-                             <p class="text-[10px] text-zinc-400 mt-2">Check your collection and transactions below.</p>
+                             <h3 class="text-[14px] font-black text-zinc-900 uppercase tracking-[0.2em]">Обзор</h3>
+                             <p class="text-[10px] text-zinc-400 mt-2">Баланс MC выше; история — во вкладке «Транзакции».</p>
+                             <a href="/account/crypto" class="inline-block mt-6 text-[10px] font-black uppercase tracking-widest text-[#7C45F5] underline decoration-2 underline-offset-4 hover:text-zinc-900">
+                                 Дополнительные крипто-адреса
+                             </a>
                         </div>
                     </div>
                 </transition>
