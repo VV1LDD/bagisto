@@ -224,7 +224,6 @@ Route::group([], function () {
         Route::group(['prefix' => 'account'], function () {
             Route::get('', [CustomerController::class, 'account'])->name('shop.customers.account.index');
             Route::get('security', [CustomerController::class, 'showSecurity'])->name('shop.customers.account.security.index');
-            Route::get('security/telegram-token', [CustomerController::class, 'generateTelegramToken'])->name('shop.customers.account.security.telegram_token');
             Route::get('security-onboarding', [CustomerController::class, 'showSecurityOnboarding'])->name('shop.customers.account.onboarding.security');
             // Email onboarding disabled
             // Route::get('security-onboarding/add-email', [CustomerController::class, 'showAddEmail'])->name('shop.customers.account.onboarding.add_email');

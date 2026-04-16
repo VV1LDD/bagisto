@@ -153,7 +153,7 @@
                         <svg class="w-10 h-10 text-zinc-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                     </div>
                     <h2 class="text-3xl font-black uppercase mb-4 tracking-tighter dark:text-white">Успешно!</h2>
-                    <p class="text-zinc-500 dark:text-zinc-400 font-bold mb-8 uppercase tracking-wider leading-relaxed">Заявка на активацию отправлена. Мы сообщим вам о результате в Telegram и на Email.</p>
+                    <p class="text-zinc-500 dark:text-zinc-400 font-bold mb-8 uppercase tracking-wider leading-relaxed">Заявка на активацию отправлена. Мы сообщим вам о результате по email.</p>
                     <a href="{{ auth()->guard('customer')->check() ? route('shop.customers.account.index') : route('shop.home.index') }}" class="inline-block bg-zinc-900 dark:bg-white dark:text-zinc-900 px-8 py-4 font-black uppercase tracking-widest text-sm shadow-[4px_4px_0px_0px_rgba(124,69,245,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all">{{ auth()->guard('customer')->check() ? 'Вернуться в кабинет' : 'На главную' }}</a>
                 </div>
 

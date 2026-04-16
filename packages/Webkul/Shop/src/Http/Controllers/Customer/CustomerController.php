@@ -555,20 +555,4 @@ class CustomerController extends Controller
         return view('shop::customers.account.security');
     }
 
-    /**
-     * Generate a new Telegram token and return the deep link.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function generateTelegramToken()
-    {
-        $customer = auth()->guard('customer')->user();
-
-        $token = $customer->generateTelegramToken();
-
-        return response()->json([
-            'status' => 'success',
-            'link'   => $customer->telegram_link,
-        ]);
-    }
 }
