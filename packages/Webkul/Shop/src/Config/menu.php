@@ -39,7 +39,7 @@ return [
     [
         'key' => 'account.redeem',
         'name' => 'Активация ваучера',
-        'route' => 'shop.customers.account.redeem.index',
+        'route' => 'shop.redeem.index',
         'icon' => 'icon-security',
         'sort' => 6,
     ],

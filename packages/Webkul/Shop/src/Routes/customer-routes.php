@@ -172,11 +172,14 @@ Route::group([], function () {
     });
 
     /**
-     * Voucher redeem — guests allowed (API calls must not sit behind auth middleware).
+     * Voucher redeem — guests allowed. Canonical URL is GET /redeem (shop.redeem.index).
      */
     Route::prefix('account')->group(function () {
+        Route::get('redeem', function () {
+            return redirect()->to(route('shop.redeem.index'), 301);
+        })->name('shop.customers.account.redeem.index');
+
         Route::prefix('redeem')->controller(RedeemController::class)->group(function () {
-            Route::get('', 'index')->name('shop.customers.account.redeem.index');
             Route::post('verify', 'verify')->name('shop.customers.account.redeem.verify');
             Route::post('send-verification', 'sendVerification')->name('shop.customers.account.redeem.send_verification');
             Route::post('activate', 'activate')->name('shop.customers.account.redeem.activate');

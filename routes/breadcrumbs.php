@@ -83,7 +83,7 @@ Breadcrumbs::for('crypto', function (BreadcrumbTrail $trail) {
 // Home > My Account > Redeem
 Breadcrumbs::for('redeem', function (BreadcrumbTrail $trail) {
     $trail->parent('account');
-    $trail->push('Активация ваучера', route('shop.customers.account.redeem.index'));
+    $trail->push('Активация ваучера', route('shop.redeem.index'));
 });
 
 // Home > My Account > Handshakes

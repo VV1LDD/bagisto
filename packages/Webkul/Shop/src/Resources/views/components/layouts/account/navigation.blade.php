@@ -52,7 +52,7 @@ $menuIcons = [
             </a>
 
             {{-- Redeem / Voucher Activation --}}
-            <a href="{{ route('shop.customers.account.redeem.index') }}" 
+            <a href="{{ route('shop.redeem.index') }}" 
                 class="group relative block w-full bg-white border-4 border-zinc-900 p-3 md:p-4 transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] active:translate-x-0 active:translate-y-0 active:shadow-none shadow-[4px_4px_0px_0px_rgba(245,158,11,1)]">
                 <div class="flex items-center gap-3 md:gap-5">
                     <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-amber-500 border-3 border-zinc-900 shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] shrink-0 transition-transform group-hover:-rotate-3">
