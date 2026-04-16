@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('handshakes', function (Blueprint $table) {
-            $table->string('tx_hash')->nullable()->unique()->after('matrix_room_id');
+            $table->string('tx_hash')->nullable()->unique()->after('status');
             $table->string('tx_status')->nullable()->after('tx_hash');
         });
     }

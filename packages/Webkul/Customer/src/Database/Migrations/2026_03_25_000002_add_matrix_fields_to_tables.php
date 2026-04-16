@@ -1,24 +1,17 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * Matrix (chat protocol) fields were removed. Kept as a no-op so existing
+     * migration batches stay valid; columns are dropped by 2026_04_16_120000_*.
      */
     public function up(): void
     {
-        Schema::table('customers', function (Blueprint $column) {
-            $column->string('matrix_user_id')->nullable()->unique()->after('telegram_token');
-            $column->text('matrix_access_token')->nullable()->after('matrix_user_id');
-        });
-
-        Schema::table('handshakes', function (Blueprint $table) {
-            $table->string('matrix_room_id')->nullable()->unique()->after('status');
-        });
     }
 
     /**
@@ -26,12 +19,5 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('customers', function (Blueprint $column) {
-            $column->dropColumn(['matrix_user_id', 'matrix_access_token']);
-        });
-
-        Schema::table('handshakes', function (Blueprint $table) {
-            $table->dropColumn(['matrix_room_id']);
-        });
     }
 };

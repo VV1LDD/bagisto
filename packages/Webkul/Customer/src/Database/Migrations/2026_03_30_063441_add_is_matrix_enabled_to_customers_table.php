@@ -1,19 +1,17 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * is_matrix_enabled removed; no-op for new installs. Existing DBs: column
+     * removed in 2026_04_16_120000_remove_matrix_fields_*.
      */
     public function up(): void
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->boolean('is_matrix_enabled')->default(0)->after('is_crypto_enabled');
-        });
     }
 
     /**
@@ -21,8 +19,5 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->dropColumn('is_matrix_enabled');
-        });
     }
 };
