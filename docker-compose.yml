@@ -1,4 +1,5 @@
-version: '3.8'
+# No Reverb/Pusher/TURN vars here. If Coolify still injects them, delete those keys
+# in the service Environment tab — they are not removed by redeploying this file alone.
 services:
   app:
     build:
