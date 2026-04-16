@@ -175,7 +175,7 @@
                         } catch (e) {
                             console.warn('Silent failure marking continuation', e);
                         }
-                        window.location.href = '{{ route('shop.customers.account.onboarding.security') }}';
+                        window.location.href = '{{ route('shop.customers.account.index') }}';
                     };
                     plusSvg.classList.remove('hidden');
                     plusSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />';

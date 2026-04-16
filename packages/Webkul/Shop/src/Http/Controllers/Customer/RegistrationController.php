@@ -117,6 +117,7 @@ class RegistrationController extends Controller
             $mnemonicWords = $reservedData['mnemonic'];
             $recoveryKey = implode(' ', $mnemonicWords);
             $creditsId = $reservedData['credits_id'];
+            $wData = $this->blockchainAddressService->deriveEthereumWallet($mnemonicWords);
         } else {
             // Generate new BIP39 mnemonic with random length for better security
             $counts = [12, 15, 18, 21, 24];
@@ -138,7 +139,7 @@ class RegistrationController extends Controller
         $privateKeyHex = $wData['private_key'] ?? null;
         $publicKeyData = $this->blockchainAddressService->derivePublicKeyData($mnemonicWords);
 
-        // Store all necessary data in session for the final store() call
+        // Store all necessary data in session for passkey finalize (mnemonic lives in DB fields only)
         session([
             'pending_registration_data' => [
                 'username'              => $username,
@@ -151,7 +152,6 @@ class RegistrationController extends Controller
                 'public_key_hash'       => $publicKeyData['public_key_hash'] ?? null,
                 'is_verified'           => 1,
             ],
-            'pending_recovery_key' => $recoveryKey
         ]);
 
         $mockCustomer = new \Webkul\Customer\Models\Customer([
@@ -291,20 +291,30 @@ class RegistrationController extends Controller
         app(\Webkul\Customer\Repositories\CustomerLoginLogRepository::class)->log($customer);
 
         Event::dispatch('customer.after.login', auth()->guard('customer')->user());
-        session()->flash('recovery_key', $recoveryKey);
-        
-        // Capture intended URL for after-registration flow (multi-step seed backup)
+
+        // Deep link / redeem: preserve destination from middleware
         if ($intended = session()->get('url.intended')) {
             session(['registration_intended_url' => $intended]);
         }
-        
+
         session()->forget('pending_recovery_key');
 
         // Force session save to ensure the next request sees the authentication state
         session()->save();
 
-        // If the user came specifically to redeem a voucher, skip onboarding and go straight there
-        return redirect()->route('shop.customers.account.onboarding.security');
+        return redirect()->to($this->afterRegistrationTargetUrl());
+    }
+
+    /**
+     * Post-registration redirect: redeem/deep link first, else account home.
+     */
+    protected function afterRegistrationTargetUrl(): string
+    {
+        if ($intended = session()->pull('registration_intended_url')) {
+            return $intended;
+        }
+
+        return route('shop.customers.account.index');
     }
 
     /**
@@ -326,12 +336,10 @@ class RegistrationController extends Controller
 
         $token = Str::random(64);
         $pendingData = session('pending_registration_data');
-        $recoveryKey = session('pending_recovery_key');
 
         // Store registration state in cache for 10 minutes (to be picked up by the phone)
         Cache::put('reg_token:' . $token, [
-            'data'         => $pendingData,
-            'recovery_key' => $recoveryKey,
+            'data' => $pendingData,
         ], now()->addMinutes(10));
 
         // Create the signed URL for the QR code
@@ -373,8 +381,7 @@ class RegistrationController extends Controller
         // Transfer cache data to the phone's session
         session([
             'pending_registration_data' => $cached['data'],
-            'pending_recovery_key'      => $cached['recovery_key'],
-            'pending_registration_id'   => $cached['data']['credits_id'],
+            'pending_registration_id' => $cached['data']['credits_id'],
             'registration_token'        => $token,
         ]);
         
@@ -417,7 +424,7 @@ class RegistrationController extends Controller
 
             return response()->json([
                 'complete'                => true,
-                'redirect_url'            => route('shop.customers.account.onboarding.security'),
+                'redirect_url'            => $this->afterRegistrationTargetUrl(),
                 'continuing_device'       => Cache::get('reg_continuing:' . $request->input('token')),
                 'is_continuing_elsewhere' => Cache::get('reg_continuing:' . $request->input('token')) && Cache::get('reg_continuing:' . $request->input('token')) !== $request->input('device'),
             ]);

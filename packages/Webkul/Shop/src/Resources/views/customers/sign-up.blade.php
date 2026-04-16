@@ -11,7 +11,7 @@
         prepare-other-url="{{ route('shop.customers.register.passkey.prepare_other') }}"
         check-status-url="{{ route('shop.customers.register.check_status') }}"
         register-passkey-url="{{ route('passkeys.register') }}"
-        onboarding-url="{{ route('shop.customers.account.onboarding.security') }}"
+        onboarding-url="{{ route('shop.customers.account.index') }}"
         session-index-url="{{ route('shop.customer.session.index') }}"
     >
         <template v-slot:logo>

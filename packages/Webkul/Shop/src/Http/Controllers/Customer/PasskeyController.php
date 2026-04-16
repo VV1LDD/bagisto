@@ -263,10 +263,7 @@ class PasskeyController extends Controller
                 'device_name' => $deviceName,
             ]);
 
-            if ($isNewRegistration && session()->has('pending_recovery_key')) {
-                session()->flash('recovery_key', session('pending_recovery_key'));
-                session()->forget('pending_recovery_key');
-            }
+            session()->forget('pending_recovery_key');
 
             if (!Auth::guard('customer')->check() && ($linkingFlow || $isNewRegistration)) {
                 Auth::guard('customer')->login($user);
@@ -283,9 +280,9 @@ class PasskeyController extends Controller
 
             \Illuminate\Support\Facades\DB::commit();
 
-            $redirectUrl = $isNewRegistration 
-                ? route('shop.customers.account.onboarding.security')
-                : redirect()->intended(route('shop.customers.account.onboarding.security'))->getTargetUrl();
+            $redirectUrl = $isNewRegistration
+                ? (session()->pull('registration_intended_url') ?: route('shop.customers.account.index'))
+                : redirect()->intended(route('shop.customers.account.index'))->getTargetUrl();
 
             return response()->json([
                 'message'      => 'Passkey registered successfully.',

@@ -22,7 +22,7 @@
             @include('shop::customers.account.passkeys.index-form', ['customer' => $customer, 'isOnboarding' => true])
             
             <div class="mt-8 flex justify-center">
-                <a href="{{ route('shop.customers.account.onboarding.security') }}" 
+                <a href="{{ route('shop.customers.account.security.index') }}" 
                    class="inline-flex items-center gap-3 text-zinc-900 hover:text-[#7C45F5] font-black text-[10px] uppercase tracking-[0.3em] transition-all group underline decoration-zinc-100 decoration-2 underline-offset-8">
                     <svg class="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>

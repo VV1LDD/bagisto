@@ -20,7 +20,7 @@
             <div class="p-8 border-b-4 border-zinc-900 bg-zinc-50 flex flex-col items-center gap-6">
                 <!-- Security/Recovery Banner -->
                 <a v-if="data.user.pending_activation" 
-                   href="/account/security-onboarding"
+                   href="/account/security"
                    class="w-full bg-amber-400 border-4 border-zinc-900 p-4 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] transition-all group">
                     <div class="flex items-center gap-4">
                         <div class="w-10 h-10 bg-zinc-900 flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] shrink-0">
