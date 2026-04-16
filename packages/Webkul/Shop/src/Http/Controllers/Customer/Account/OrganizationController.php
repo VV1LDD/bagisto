@@ -125,10 +125,6 @@ class OrganizationController extends Controller
 
         session()->flash('success', trans('shop::app.customers.account.organizations.create-success'));
 
-        if ($request->has('from_wallet')) {
-            return redirect()->route('shop.customers.account.credits.index', ['step' => 'organizations']);
-        }
-
         return redirect()->route('shop.customers.account.organizations.index');
     }
 

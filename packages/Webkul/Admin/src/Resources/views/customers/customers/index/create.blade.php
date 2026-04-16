@@ -172,18 +172,6 @@
                         </div>
 
                         <div class="flex flex-wrap gap-6 max-sm:flex-wrap mt-4">
-                            <!-- B2B possibilities Status -->
-                            <x-admin::form.control-group class="!mb-0">
-                                <x-admin::form.control-group.label>
-                                    🏢 B2B возможности
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control type="hidden" name="is_b2b_enabled" value="0" />
-
-                                <x-admin::form.control-group.control type="switch" name="is_b2b_enabled" :value="1"
-                                    label="B2B возможности" />
-                            </x-admin::form.control-group>
-
                             <!-- Crypto Top-up Status -->
                             <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.label>

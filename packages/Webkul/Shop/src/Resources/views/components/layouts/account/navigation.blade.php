@@ -78,11 +78,7 @@ $menuIcons = [
         @foreach (menu()->getItems('customer') as $menuItem)
             @if ($menuItem->haveChildren())
                 @foreach ($menuItem->getChildren() as $subMenuItem)
-                    @if ($subMenuItem->getKey() === 'account.organizations' && !$customer->is_b2b_enabled)
-                        @continue
-                    @endif
-                    
-                    @if (in_array($subMenuItem->getKey(), ['account.profile', 'account.passkeys', 'account.orders', 'account.login_activity', 'account.address', 'account.redeem']))
+                    @if (in_array($subMenuItem->getKey(), ['account.profile', 'account.passkeys', 'account.orders', 'account.login_activity', 'account.address', 'account.redeem', 'account.organizations']))
                         @continue
                     @endif
 
@@ -135,11 +131,7 @@ $menuIcons = [
                 <div class="flex-1 min-w-0">
                     <span class="text-zinc-900 text-base md:text-lg font-black uppercase tracking-tight block">Безопасность</span>
                     <p class="text-[9px] md:text-xs text-zinc-500 font-bold uppercase tracking-wider leading-none">
-                        @if (($customer->credits_id && str_starts_with($customer->credits_id, 'M-')) || ($customer->credits_id && str_starts_with($customer->credits_id, '0x') && is_null($customer->encrypted_private_key)))
-                            Активировать NFT-функции 💎
-                        @else
-                            Пароль{{ $customer->mnemonic_verified_at ? '' : ', фраза' }} и устройства
-                        @endif
+                        Восстановление, Passkeys, сессии, организации
                     </p>
                 </div>
                 <div class="opacity-0 group-hover:opacity-100 transition-opacity">

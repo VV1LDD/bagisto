@@ -100,7 +100,6 @@ class CustomerController extends Controller
                         'phone',
                         'customer_group_id',
                         'channel_id',
-                        'is_b2b_enabled',
                         'is_crypto_enabled',
                     ]));
 
@@ -156,7 +155,6 @@ class CustomerController extends Controller
             'customer_group_id',
             'status',
             'is_suspended',
-            'is_b2b_enabled',
             'is_crypto_enabled',
         ]);
 

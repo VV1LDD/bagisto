@@ -75,7 +75,6 @@ class Customer extends Authenticatable implements CustomerContract, HasPasskeys
         'subscribed_to_news_letter' => 'boolean',
         'balance' => 'decimal:4',
         'is_call_enabled' => 'boolean',
-        'is_b2b_enabled' => 'boolean',
         'is_crypto_enabled' => 'boolean',
         'mnemonic_verified_at' => 'datetime',
     ];
@@ -112,7 +111,6 @@ class Customer extends Authenticatable implements CustomerContract, HasPasskeys
         'balance',
         'credits_id',
         'credits_alias',
-        'is_b2b_enabled',
         'is_crypto_enabled',
         'mnemonic_hash',
         'encrypted_mnemonic',

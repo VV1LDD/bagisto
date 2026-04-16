@@ -1,6 +1,9 @@
 <x-shop::layouts.account :show-back="false">
     <div class="flex-auto pb-3  ios-group max-w-[800px] mx-auto">
-        <div class="px-5 pt-7 pb-2">
+        <div class="px-5 pt-7 pb-1">
+            <a href="{{ route('shop.customers.account.security.index') }}" class="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-[#7C45F5] mb-3">
+                <span class="icon-arrow-left"></span> Безопасность
+            </a>
             <h1 class="text-[22px] font-bold text-zinc-900 leading-tight">
                 @lang('shop::app.customers.account.organizations.index.title')
             </h1>
