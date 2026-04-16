@@ -21,7 +21,6 @@ Route::get('@{alias}', [AliasProfileController::class, 'index'])->name('shop.ali
  * Direct Redeem Alias
  */
 Route::get('redeem', [\Webkul\Shop\Http\Controllers\Customer\Account\RedeemController::class, 'index'])
-    ->middleware('customer')
     ->name('shop.redeem.index');
 
 /**

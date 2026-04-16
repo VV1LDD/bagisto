@@ -171,6 +171,18 @@ Route::group([], function () {
         Route::post('register', 'register')->name('passkeys.register');
     });
 
+    /**
+     * Voucher redeem — guests allowed (API calls must not sit behind auth middleware).
+     */
+    Route::prefix('account')->group(function () {
+        Route::prefix('redeem')->controller(RedeemController::class)->group(function () {
+            Route::get('', 'index')->name('shop.customers.account.redeem.index');
+            Route::post('verify', 'verify')->name('shop.customers.account.redeem.verify');
+            Route::post('send-verification', 'sendVerification')->name('shop.customers.account.redeem.send_verification');
+            Route::post('activate', 'activate')->name('shop.customers.account.redeem.activate');
+        });
+    });
+
     Route::group(['middleware' => ['customer']], function () {
         Route::group(['middleware' => [NoCacheMiddleware::class]], function () {
             /**
@@ -253,16 +265,6 @@ Route::group([], function () {
 
                     Route::get('test-route', function () {
                         return 'Customer account group is working!';
-                    });
-
-                    /**
-                     * Redeem.
-                     */
-                    Route::prefix('redeem')->controller(\Webkul\Shop\Http\Controllers\Customer\Account\RedeemController::class)->group(function () {
-                        Route::get('', 'index')->name('shop.customers.account.redeem.index');
-                        Route::post('verify', 'verify')->name('shop.customers.account.redeem.verify');
-                        Route::post('send-verification', 'sendVerification')->name('shop.customers.account.redeem.send_verification');
-                        Route::post('activate', 'activate')->name('shop.customers.account.redeem.activate');
                     });
                 });
                 Route::controller(CustomerController::class)->group(function () {

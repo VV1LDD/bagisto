@@ -15,7 +15,7 @@
             <!-- Header with Back Button -->
             <div class="flex items-center gap-3 mb-6 px-0 pt-0">
                 <button type="button" 
-                    onclick="window.location.href = '{{ route('shop.customers.account.index') }}'"
+                    onclick="window.location.href = '{{ auth()->guard('customer')->check() ? route('shop.customers.account.index') : route('shop.home.index') }}'"
                     class="w-10 h-10 bg-[#D6FF00] border-4 border-black flex items-center justify-center text-black active:scale-95 transition-all box-box-shadow-sm hover:translate-x-1 hover:translate-y-1 hover:box-shadow-none">
                     <span class="icon-arrow-left text-xl font-black"></span>
                 </button>
@@ -154,7 +154,7 @@
                     </div>
                     <h2 class="text-3xl font-black uppercase mb-4 tracking-tighter dark:text-white">Успешно!</h2>
                     <p class="text-zinc-500 dark:text-zinc-400 font-bold mb-8 uppercase tracking-wider leading-relaxed">Заявка на активацию отправлена. Мы сообщим вам о результате в Telegram и на Email.</p>
-                    <a href="{{ route('shop.customers.account.index') }}" class="inline-block bg-zinc-900 dark:bg-white dark:text-zinc-900 px-8 py-4 font-black uppercase tracking-widest text-sm shadow-[4px_4px_0px_0px_rgba(124,69,245,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all">Вернуться в кабинет</a>
+                    <a href="{{ auth()->guard('customer')->check() ? route('shop.customers.account.index') : route('shop.home.index') }}" class="inline-block bg-zinc-900 dark:bg-white dark:text-zinc-900 px-8 py-4 font-black uppercase tracking-widest text-sm shadow-[4px_4px_0px_0px_rgba(124,69,245,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all">{{ auth()->guard('customer')->check() ? 'Вернуться в кабинет' : 'На главную' }}</a>
                 </div>
 
             </div>
