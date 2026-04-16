@@ -13,7 +13,9 @@ services:
       APP_KEY: "${APP_KEY}"
       APP_DEBUG: "${APP_DEBUG:-false}"
       APP_URL: "${APP_URL}"
-      APP_ADMIN_DOMAIN: "${APP_ADMIN_DOMAIN}"
+      # Laravel reads admin_domain from SERVICE_FQDN_ADMIN first, then APP_ADMIN_DOMAIN (config/app.php)
+      SERVICE_FQDN_ADMIN: "${SERVICE_FQDN_ADMIN:-}"
+      APP_ADMIN_DOMAIN: "${APP_ADMIN_DOMAIN:-}"
       APP_ADMIN_URL_FULL: "${SERVICE_FQDN_ADMIN:-https://timebeing.meanly.ru}"
       APP_ADMIN_URL: "${APP_ADMIN_URL:-admin}"
       DB_CONNECTION: mysql
@@ -60,7 +62,8 @@ services:
       APP_KEY: "${APP_KEY}"
       APP_DEBUG: "${APP_DEBUG:-false}"
       APP_URL: "${SERVICE_FQDN_ADMIN:-https://timebeing.meanly.ru}"
-      APP_ADMIN_DOMAIN: "${APP_ADMIN_DOMAIN:-${SERVICE_FQDN_ADMIN}}"
+      SERVICE_FQDN_ADMIN: "${SERVICE_FQDN_ADMIN:-}"
+      APP_ADMIN_DOMAIN: "${APP_ADMIN_DOMAIN:-}"
       APP_ADMIN_URL_FULL: "${SERVICE_FQDN_ADMIN:-https://timebeing.meanly.ru}"
       APP_ADMIN_URL: "" # Root access on the admin domain
       DB_CONNECTION: mysql
