@@ -17,6 +17,7 @@ use Webkul\Shop\Http\Controllers\DataGridController;
 use Webkul\Shop\Http\Controllers\Customer\PasskeyController;
 use Webkul\Shop\Http\Controllers\Customer\Account\TransferController;
 use Webkul\Shop\Http\Controllers\Customer\Account\RedeemController;
+use Webkul\Shop\Http\Controllers\Customer\Account\OrganizationController;
 use Webkul\Shop\Http\Controllers\Customer\QrLoginController;
 
 Route::group([], function () {
@@ -363,8 +364,38 @@ Route::group([], function () {
                  */
 
                 /**
-                 * Organizations.
+                 * Organizations (B2B legal entities, bank details).
                  */
+                Route::prefix('organizations')->controller(OrganizationController::class)->group(function () {
+                    Route::get('', 'index')->name('shop.customers.account.organizations.index');
+
+                    Route::get('create', 'create')->name('shop.customers.account.organizations.create');
+
+                    Route::post('', 'store')->name('shop.customers.account.organizations.store');
+
+                    Route::get('suggest', 'suggestOrganization')->name('shop.customers.account.organizations.suggest');
+
+                    Route::get('suggest-bank', 'suggestBank')->name('shop.customers.account.organizations.suggest_bank');
+
+                    Route::get('lookup-inn/{inn}', 'lookupInn')->name('shop.customers.account.organizations.lookup_inn');
+
+                    Route::get('lookup-bic/{bic}', 'lookupBic')->name('shop.customers.account.organizations.lookup_bic');
+
+                    Route::get('edit/{id}', 'edit')->name('shop.customers.account.organizations.edit');
+
+                    Route::put('edit/{id}', 'update')->name('shop.customers.account.organizations.update');
+
+                    Route::delete('delete/{id}', 'destroy')->name('shop.customers.account.organizations.delete');
+
+                    Route::post('{organizationId}/settlement-accounts', 'storeSettlementAccount')
+                        ->name('shop.customers.account.organizations.settlement_accounts.store');
+
+                    Route::put('{organizationId}/settlement-accounts/{accountId}/alias', 'updateSettlementAccountAlias')
+                        ->name('shop.customers.account.organizations.settlement_accounts.update_alias');
+
+                    Route::delete('{organizationId}/settlement-accounts/{accountId}', 'destroySettlementAccount')
+                        ->name('shop.customers.account.organizations.settlement_accounts.destroy');
+                });
 
                 /**
                  * Crypto Wallets.
